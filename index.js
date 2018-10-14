@@ -4,7 +4,6 @@ const morgan = require('morgan')
 const compression = require('compression')
 const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 8080
-const nodemon = require('nodemon')
 const app = express()
 module.exports = app
 
@@ -19,12 +18,8 @@ const createApp = () => {
   // compression middleware
   app.use(compression())
 
-  app.get('/', (req, res, next)=>{
-    console.log('Hit route')
-    res.send(`Response: ${res}`)
-  })
-
-  // session middleware with passport
+  // routes
+  app.use('/api', require('./api'))
 
   // static file-serving middleware
   // app.use(express.static(path.join(__dirname, '..', 'public')))
