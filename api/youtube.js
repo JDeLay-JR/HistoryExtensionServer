@@ -1,12 +1,25 @@
 const router = require('express').Router();
+const search = require('youtube-search');
+const { YouTubeAPIKey } = require('../secrets_file');
 
-module.exports = router;
+const opts = {
+  maxResults: 5,
+  key: YouTubeAPIKey,
+};
 
 router.get('/:historyData', (req, res, next) => {
   try {
-    const { historyData } = req.params;
-    res.send(`Hit Youtube route: ${historyData}`);
+    let { historyData } = req.params;
+    historyData = historyData.split('_').join(' ');
+    console.log(`History Data: ${historyData}`);
+    search(historyData, opts, (err, results) => {
+      if (err) return console.log(err);
+      console.dir(results);
+      return res.send(`Hit Youtube route: ${results}`);
+    });
   } catch (err) {
     next(err);
   }
 });
+
+module.exports = router;
