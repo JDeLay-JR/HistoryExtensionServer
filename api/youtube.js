@@ -7,7 +7,7 @@ const opts = {
   key: YouTubeAPIKey,
 };
 
-router.get('/:historyData', (req, res, next) => {
+router.post('/:historyData', (req, res, next) => {
   try {
     let { historyData } = req.params;
     historyData = historyData.split('_').join(' ');
@@ -15,7 +15,7 @@ router.get('/:historyData', (req, res, next) => {
     search(historyData, opts, (err, results) => {
       if (err) return console.log(err);
       console.dir(results);
-      return res.send(`Hit Youtube route: ${results}`);
+      return res.send(results);
     });
   } catch (err) {
     next(err);
