@@ -1,6 +1,5 @@
 const router = require('express').Router();
 
-module.exports = router;
 
 router.use('/youtube', require('./youtube'));
 // router.use('/wiki', require('./wiki'))
@@ -12,3 +11,5 @@ router.use((req, res, next) => {
   error.status = 404;
   next(error);
 });
+
+module.exports = router;

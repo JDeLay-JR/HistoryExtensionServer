@@ -1,9 +1,11 @@
+/* eslint-disable global-require */
+/* eslint-disable no-unused-vars */
+
 const express = require('express');
 const morgan = require('morgan');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const api = require('./api');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -25,7 +27,7 @@ const createApp = () => {
   app.use(compression());
 
   // routes
-  app.use('/api', api);
+  app.use('/api', require('./api'));
 
 
   // error handling endware
