@@ -2,3 +2,4 @@ secrets_file.js
 .DS_Store
 npm-debug.log
 yarn-error.log
+node_modules
