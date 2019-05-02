@@ -13,10 +13,11 @@ router.post('/:historyData', (req, res, next) => {
   try {
     let { historyData } = req.params;
     historyData = historyData.split('_').join(' ');
-    console.log(`History Data: ${historyData}`);
     search(historyData, opts, (err, results) => {
-      if (err) return console.log(err);
-      console.dir(results);
+      if (err) {
+        const wikiErr = new Error('Error connecting to Wikipedia')
+        next(wikiErr)
+      }
       return res.send(results);
     });
   } catch (err) {
